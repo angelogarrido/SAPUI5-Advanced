@@ -1,11 +1,29 @@
+// @ts-nocheck
 sap.ui.define([
     "sap/ui/core/mvc/Controller"
 ], function (Controller) {
 
-    return Controller.extend("logaligroup.Employees.controller.EmployeeDetails", {
+    function onInit() {
 
-        onInit: function () {
+    };
 
-        },
-    });
+    function onCreateIncidence() {
+
+        var tableIncidence = this.getView().byId("tableIncidence");
+        var newIncidence   = sap.ui.xmlfragment("logaligroup.Employees.fragment.NewIncidence", this);
+        var incidenceModel = this.getView().getModel("incidenceModel");
+        var odata = incidenceModel.getData();
+        var index = odata.length;
+        odata.push({ index : index + 1});
+        incidenceModel.refresh();
+        newIncidence.bindElement("incidenceModel>/" + index);
+        tableIncidence.addContent(newIncidence);
+
+    };
+
+    var EmployeeDetails = Controller.extend("logaligroup.Employees.controller.EmployeeDetails", {});
+    EmployeeDetails.prototype.onInit = onInit;
+    EmployeeDetails.prototype.onCreateIncidence = onCreateIncidence;
+
+    return EmployeeDetails;
 });
