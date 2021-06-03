@@ -1,7 +1,8 @@
 // @ts-nocheck
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], function (Controller) {
+    "sap/ui/core/mvc/Controller",
+    "logaligroup/Employees/model/formatter"
+], function (Controller, formatter) {
 
     function onInit() {
 
@@ -22,8 +23,9 @@ sap.ui.define([
     };
 
     var EmployeeDetails = Controller.extend("logaligroup.Employees.controller.EmployeeDetails", {});
+
     EmployeeDetails.prototype.onInit = onInit;
     EmployeeDetails.prototype.onCreateIncidence = onCreateIncidence;
-
+    EmployeeDetails.prototype.Formatter = formatter
     return EmployeeDetails;
 });
